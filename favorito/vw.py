@@ -1,4 +1,5 @@
 from django.http import HttpResponseRedirect
+from django.shortcuts import redirect
 from django.urls import reverse
 
 from igs_app_base.utils.utils import crud_list_toolbar
@@ -64,7 +65,7 @@ class UsrCreate(GenericCreate):
         self.object = form.save(commit=False)
         self.object.user = self.request.user
         self.object.save()
-        return HttpResponseRedirect(self.get_success_url())
+        return redirect(self.get_success_url())
 
     def get_success_url(self):
         return reverse("mine_fav_read", kwargs={"pk": self.object.pk})
